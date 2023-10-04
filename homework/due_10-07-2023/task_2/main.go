@@ -17,20 +17,21 @@ type AutomobileSpecification struct {
 	NSportFeatures     int
 }
 
-func isSportCar(spec AutomobileSpecification) bool {
+func isSportCar(spec *AutomobileSpecification) bool {
+	temp_sport_features := spec.NSportFeatures
 	if spec.NDoors < 4 {
-		spec.NSportFeatures += 1
+		temp_sport_features += 1
 	}
 
 	if spec.HorsePower > 150 {
-		spec.NSportFeatures += 1
+		temp_sport_features += 1
 	}
 
 	if spec.WeightKilogram < 1050 {
-		spec.NSportFeatures += 1
+		temp_sport_features += 1
 	}
 
-	return spec.NSportFeatures > 2
+	return temp_sport_features > 2
 }
 
 func main() {
@@ -48,9 +49,9 @@ func main() {
 		HasRoof:            true,
 	}
 
-	fmt.Printf("is %s a sport cat? %v\n", car1.Name, isSportCar(car1))
+	fmt.Printf("is %s a sport cat? %v\n", car1.Name, isSportCar(&car1))
 	// did something change?
-	fmt.Printf("is %s a sport cat? %v\n", car1.Name, isSportCar(car1))
+	fmt.Printf("is %s a sport cat? %v\n", car1.Name, isSportCar(&car1))
 	// did something change?
-	fmt.Printf("is %s a sport cat? %v\n", car1.Name, isSportCar(car1))
+	fmt.Printf("is %s a sport cat? %v\n", car1.Name, isSportCar(&car1))
 }

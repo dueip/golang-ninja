@@ -20,7 +20,12 @@ func MaskPasswordBad(password string) string {
 }
 
 func MaskPasswordGood(password string) string {
-	return ""
+	password_as_bytes := make([]byte, len(password))
+	copy(password_as_bytes, password)
+	for i := 0; i < len(password_as_bytes); i += 3 {
+		password_as_bytes[i] = '_'
+	}
+	return string(password_as_bytes)
 }
 
 func BenchmarkMaskPassword(b *testing.B) {
